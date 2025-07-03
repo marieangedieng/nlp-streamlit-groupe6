@@ -19,7 +19,7 @@ ADAPTER_PATH = os.path.abspath("/result/mistral-finetuned-summarization")
 
 
 
-secret_value="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"
+secret_value=os.getenv("HF_TOKEN")
 login(secret_value)
 
 # %%
