@@ -1,5 +1,3 @@
-
-
 # %%
 import os
 import tempfile
@@ -15,11 +13,10 @@ from huggingface_hub import login
 
 # %%
 MODEL_ID = "mistralai/Mistral-7B-v0.1"
-ADAPTER_PATH = os.path.abspath("/result/mistral-finetuned-summarization")
+ADAPTER_PATH = os.path.abspath("/mistral-finetuned-summarization/mistral-finetuned-summarization")
 
 
-
-secret_value=os.getenv("HF_TOKEN")
+secret_value="<saisir_un_token_finegrained_de_hugging-face>"
 login(secret_value)
 
 # %%
@@ -63,10 +60,8 @@ if st.button("Générer le résumé") and abstract.strip():
         """
         inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
         with torch.no_grad():
-            outputs = model.generate(**inputs, max_new_tokens=256, pad_token_id=tokenizer.eos_token_id)
+            outputs = model.generate(**inputs, max_new_tokens=1024, pad_token_id=tokenizer.eos_token_id)
         resume = tokenizer.decode(outputs[0], skip_special_tokens=True).split("### RÉSUMÉ:")[-1].strip()
 
     st.subheader("📝 Résumé généré")
     st.write(resume)
-
-

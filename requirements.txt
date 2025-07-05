@@ -2,4 +2,3 @@ streamlit
 torch
 transformers
 peft
-huggingface_hub
